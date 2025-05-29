@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FitTrack.Application\FitTrack.Application.csproj" />
     <ProjectReference Include="..\FitTrack.Contracts\FitTrack.Contracts.csproj" />
+    <ProjectReference Include="..\FitTrack.Infrastructure\FitTrack.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

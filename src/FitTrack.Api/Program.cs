@@ -1,6 +1,11 @@
+using FitTrack.Application;
+
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddControllers();
+    builder.Services
+        .AddApplication()
+        .AddInfrastructure();
 }
 
 // Add services to the container.
