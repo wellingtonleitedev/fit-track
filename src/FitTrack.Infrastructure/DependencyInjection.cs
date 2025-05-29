@@ -10,6 +10,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddDbContext<FitTrackDbContext>(options => options.UseSqlite("Data Source = FitTrack.db"));
+        services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<FitTrackDbContext>());
 
         return services;
     }
