@@ -1,8 +1,10 @@
 using FitTrack.Domain.Exercises;
+using FitTrack.Domain.TrainingExercises;
 
 namespace FitTrack.Domain.Trainings;
 
-public class Training {
+public class Training
+{
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = string.Empty;
     public string? Category { get; set; } = string.Empty;
@@ -10,4 +12,6 @@ public class Training {
     public List<Exercise> Exercises { get; set; } = [];
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
+    
+    public ICollection<TrainingExercise> TrainingExercise { get; set; } = [];
 }
