@@ -9,10 +9,12 @@ namespace FitTrack.Application.Exercises.Commands.CreateExercise;
 public class CreateExerciseCommandHandler : IRequestHandler<CreateExerciseCommand, ErrorOr<Exercise>>
 {
     private readonly IExerciseRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateExerciseCommandHandler(IExerciseRepository repository)
+    public CreateExerciseCommandHandler(IExerciseRepository repository, IUnitOfWork unitOfWork)
     {
         _repository = repository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<ErrorOr<Exercise>> Handle(CreateExerciseCommand request, CancellationToken cancellationToken)
@@ -26,6 +28,7 @@ public class CreateExerciseCommandHandler : IRequestHandler<CreateExerciseComman
         };
 
         await _repository.AddAsync(exercise);
+        await _unitOfWork.CommitChangesAsync();
         return exercise;
     }
 }

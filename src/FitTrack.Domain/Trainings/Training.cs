@@ -1,18 +1,17 @@
-using FitTrack.Domain.Trainings;
+using FitTrack.Domain.Exercises;
 using FitTrack.Domain.TrainingExercises;
 
-namespace FitTrack.Domain.Exercises;
+namespace FitTrack.Domain.Trainings;
 
-public class Exercise
+public class Training
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = string.Empty;
-    public string Sets { get; set; } = string.Empty;
-    public string? Rest { get; set; }
-    public string? Description { get; set; }
-    public List<Training> Trainings { get; set; } = [];
+    public string? Category { get; set; } = string.Empty;
+    public DayTypes? Day { get; set; } = DayTypes.Monday;
+    public List<Exercise> Exercises { get; set; } = [];
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
+    
     public ICollection<TrainingExercise> TrainingExercise { get; set; } = [];
 }
