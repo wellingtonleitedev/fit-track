@@ -16,6 +16,6 @@ public class TrainingRepository : ITrainingRepository
 
     public async Task AddAsync(Training training)
     {
-        await _dbContext.AddAsync(training);
+        await _dbContext.Trainings.AddAsync(training);
     }
 }
