@@ -11,5 +11,5 @@ public class Workout
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-    public ICollection<WorkoutRecord> Records { get; set; } = new List<WorkoutRecord>();
+    public ICollection<WorkoutRecord> Records { get; set; } = [];
 }

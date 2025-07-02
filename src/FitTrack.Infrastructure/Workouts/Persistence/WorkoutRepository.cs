@@ -1,7 +1,7 @@
 using FitTrack.Domain.Workouts;
+using Microsoft.EntityFrameworkCore;
 using FitTrack.Application.Common.Interfaces;
 using FitTrack.Infrastructure.Common.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace FitTrack.Infrastructure.Workouts.Persistence;
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FitTrack.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateWorkoutRecords : Migration
+    public partial class CreateWorkoutRecordsTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

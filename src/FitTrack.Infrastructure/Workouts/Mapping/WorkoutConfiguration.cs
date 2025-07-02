@@ -2,7 +2,7 @@ using FitTrack.Domain.Workouts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FitTrack.Infrastructure.Mapping;
+namespace FitTrack.Infrastructure.Workouts.Mapping;
 
 public class WorkoutConfiguration : IEntityTypeConfiguration<Workout>
 {

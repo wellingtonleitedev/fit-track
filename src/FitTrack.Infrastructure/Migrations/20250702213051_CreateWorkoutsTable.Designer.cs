@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitTrack.Infrastructure.Migrations
 {
     [DbContext(typeof(FitTrackDbContext))]
-    [Migration("20250626183224_AddTraining")]
-    partial class AddTraining
+    [Migration("20250702213051_CreateWorkoutsTable")]
+    partial class CreateWorkoutsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,7 +65,7 @@ namespace FitTrack.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnUpdate()
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -77,45 +77,11 @@ namespace FitTrack.Infrastructure.Migrations
                     b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("FitTrack.Domain.TrainingExercises.TrainingExercise", b =>
-                {
-                    b.Property<Guid>("ExerciseId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("TrainingId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<int?>("Order")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnUpdate()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.HasKey("ExerciseId", "TrainingId");
-
-                    b.HasIndex("TrainingId");
-
-                    b.ToTable("TrainingExercises");
-                });
-
             modelBuilder.Entity("FitTrack.Domain.Trainings.Training", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -131,45 +97,42 @@ namespace FitTrack.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnUpdate()
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("TEXT")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Category")
-                        .IsUnique();
-
                     b.ToTable("Trainings");
                 });
 
-            modelBuilder.Entity("FitTrack.Domain.Users.User", b =>
+            modelBuilder.Entity("FitTrack.Domain.Workouts.Workout", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("TEXT");
+                    b.Property<Guid>("TrainingId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("TEXT");
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.HasIndex("TrainingId");
+
+                    b.ToTable("Workouts");
                 });
 
             modelBuilder.Entity("ExerciseTraining", b =>
@@ -187,33 +150,15 @@ namespace FitTrack.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FitTrack.Domain.TrainingExercises.TrainingExercise", b =>
+            modelBuilder.Entity("FitTrack.Domain.Workouts.Workout", b =>
                 {
-                    b.HasOne("FitTrack.Domain.Exercises.Exercise", "Exercise")
-                        .WithMany("TrainingExercise")
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FitTrack.Domain.Trainings.Training", "Training")
-                        .WithMany("TrainingExercise")
+                        .WithMany()
                         .HasForeignKey("TrainingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Exercise");
-
                     b.Navigation("Training");
-                });
-
-            modelBuilder.Entity("FitTrack.Domain.Exercises.Exercise", b =>
-                {
-                    b.Navigation("TrainingExercise");
-                });
-
-            modelBuilder.Entity("FitTrack.Domain.Trainings.Training", b =>
-                {
-                    b.Navigation("TrainingExercise");
                 });
 #pragma warning restore 612, 618
         }

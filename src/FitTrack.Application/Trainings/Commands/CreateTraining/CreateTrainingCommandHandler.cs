@@ -26,7 +26,6 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingComman
         var training = new Training
         {
             Name = command.Name,
-            Category = command.Category,
             Day = command.Day,
             Exercises = exercises
         };

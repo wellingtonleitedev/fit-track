@@ -1,4 +1,3 @@
-
 using FitTrack.Domain.Trainings;
 using FitTrack.Application.Common.Interfaces;
 using FitTrack.Infrastructure.Common.Persistence;
