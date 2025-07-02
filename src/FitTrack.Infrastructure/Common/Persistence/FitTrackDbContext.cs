@@ -3,11 +3,13 @@ using FitTrack.Domain.Exercises;
 using Microsoft.EntityFrameworkCore;
 using FitTrack.Application.Common.Interfaces;
 using FitTrack.Domain.Trainings;
+using FitTrack.Domain.Workouts;
 
 namespace FitTrack.Infrastructure.Common.Persistence;
 
 public class FitTrackDbContext : DbContext, IUnitOfWork
 {
+    public DbSet<Workout> Workouts { get; set; }
     public DbSet<Exercise> Exercises { get; set; }
     public DbSet<Training> Trainings { get; set; }
 
