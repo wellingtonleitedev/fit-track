@@ -12,9 +12,10 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IWorkoutRepository, WorkoutRepository>();
         services.AddScoped<IExerciseRepository, ExerciseRepository>();
         services.AddScoped<ITrainingRepository, TrainingRepository>();
-        services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+        services.AddScoped<IWorkoutRecordRepository, WorkoutRecordRepository>();
         services.AddDbContext<FitTrackDbContext>(options => options.UseSqlite("Data Source = FitTrack.db"));
         services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<FitTrackDbContext>());
 
