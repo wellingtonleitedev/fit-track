@@ -1,11 +1,9 @@
 using ErrorOr;
-
-using FitTrack.Application.Common.Interfaces;
-using FitTrack.Domain.Workouts;
-
 using MediatR;
+using FitTrack.Domain.Workouts;
+using FitTrack.Application.Common.Interfaces;
 
-namespace FitTrack.Application.Workouts.Commands;
+namespace FitTrack.Application.Workouts.Commands.CreateWorkout;
 
 public class CreateWorkoutCommandHandler : IRequestHandler<CreateWorkoutCommand, ErrorOr<Workout>>
 {
