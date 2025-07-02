@@ -8,7 +8,7 @@ public class WorkoutRecordConfiguration : IEntityTypeConfiguration<WorkoutRecord
 {
     public void Configure(EntityTypeBuilder<WorkoutRecord> builder)
     {
-        builder.ToTable("WorkoutRecords");
+        builder.ToTable("workout_records");
         
         builder.HasKey(wr => wr.Id);
         builder.Property(wr => wr.Id).HasColumnType("uuid");
