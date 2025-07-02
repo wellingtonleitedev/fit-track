@@ -20,7 +20,7 @@ public class TrainingsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(CreateTrainingRequest request)
     {
-        var command = new CreateTrainingCommand(request.Name, request.Category, (Domain.Trainings.DayTypes?)request.Day, request.Exercises);
+        var command = new CreateTrainingCommand(request.Name, (Domain.Trainings.DayTypes?)request.Day, request.Exercises);
 
         var result = await _mediator.Send(command);
 
@@ -29,7 +29,6 @@ public class TrainingsController : ControllerBase
                 new TrainingResponse(
                     training.Id,
                     training.Name,
-                    training.Category,
                     (DayTypes?)training.Day,
                     training.Exercises.Select(e =>
                         new ExerciseResponse(
