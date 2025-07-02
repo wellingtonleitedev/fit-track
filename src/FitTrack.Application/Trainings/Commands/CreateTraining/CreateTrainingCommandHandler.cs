@@ -1,6 +1,7 @@
 using MediatR;
 using ErrorOr;
 using FitTrack.Domain.Trainings;
+using FitTrack.Domain.Exercises;
 using FitTrack.Application.Common.Interfaces;
 
 
@@ -10,15 +11,22 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingComman
 {
     private readonly ITrainingRepository _trainingRepository;
     private readonly IExerciseRepository _exerciseRepository;
+    private readonly IExerciseTrainingRepository _exerciseTrainingRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateTrainingCommandHandler(ITrainingRepository trainingRepository, IExerciseRepository exerciseRepository, IUnitOfWork unitOfWork)
+    public CreateTrainingCommandHandler(
+        IUnitOfWork unitOfWork,
+        ITrainingRepository trainingRepository,
+        IExerciseRepository exerciseRepository,
+        IExerciseTrainingRepository exerciseTrainingRepository
+    )
     {
+        _unitOfWork = unitOfWork;
         _trainingRepository = trainingRepository;
         _exerciseRepository = exerciseRepository;
-        _unitOfWork = unitOfWork;
+        _exerciseTrainingRepository = exerciseTrainingRepository;
     }
-    
+
 
     public async Task<ErrorOr<Training>> Handle(CreateTrainingCommand command, CancellationToken cancellationToken)
     {
@@ -28,12 +36,19 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingComman
             Name = command.Name,
             Category = command.Category,
             Day = command.Day,
-            Exercises = exercises
         };
 
         await _trainingRepository.AddAsync(training);
+        await _exerciseTrainingRepository.AddRangeAsync(
+            exercises.Select(exercise => new ExerciseTraining
+            {
+                ExerciseId = exercise.Id,
+                TrainingId = training.Id,
+            }).ToList()
+        );
+
         await _unitOfWork.CommitChangesAsync();
-        
+
         return training;
     }
 }
