@@ -1,30 +1,31 @@
+using FitTrack.Domain.Exercises;
 using Microsoft.EntityFrameworkCore;
-using FitTrack.Domain.TrainingExercises;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FitTrack.Infrastructure.Mapping;
 
-public class TrainingExerciseConfiguration : IEntityTypeConfiguration<TrainingExercise>
+public class ExerciseTrainingConfiguration : IEntityTypeConfiguration<ExerciseTraining>
 {
-    public void Configure(EntityTypeBuilder<TrainingExercise> builder)
+    public void Configure(EntityTypeBuilder<ExerciseTraining> builder)
     {
-        builder.HasKey(te => te.Id);
+        builder.ToTable("exercise_trainings");
 
+        builder.HasKey(te => te.Id);
         builder.Property(te => te.Id).HasColumnType("uuid");
 
         builder.HasKey(te => new { te.ExerciseId, te.TrainingId });
 
         builder.HasOne(te => te.Training)
-            .WithMany(t => t.TrainingExercise)
+            .WithMany(t => t.ExerciseTrainings)
             .HasForeignKey(te => te.TrainingId)
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(te => te.Exercise)
-            .WithMany(e => e.TrainingExercise)
+            .WithMany(e => e.ExerciseTrainings)
             .HasForeignKey(te => te.ExerciseId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.Property(te => te.Order);
+        builder.Property(te => te.Order).IsRequired(false);
 
         builder.Property(te => te.CreatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
@@ -32,6 +33,6 @@ public class TrainingExerciseConfiguration : IEntityTypeConfiguration<TrainingEx
 
         builder.Property(te => te.UpdatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
-            .ValueGeneratedOnUpdate();
+            .ValueGeneratedOnAddOrUpdate();
     }
 }

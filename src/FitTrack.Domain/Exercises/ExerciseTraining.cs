@@ -1,9 +1,8 @@
-using FitTrack.Domain.Exercises;
 using FitTrack.Domain.Trainings;
 
-namespace FitTrack.Domain.TrainingExercises;
+namespace FitTrack.Domain.Exercises;
 
-public class TrainingExercise
+public class ExerciseTraining
 {
     public Guid Id { get; set; }
     public Guid ExerciseId { get; set; }

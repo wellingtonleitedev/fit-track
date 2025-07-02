@@ -9,6 +9,8 @@ public class TrainingConfiguration : IEntityTypeConfiguration<Training>
 {
     public void Configure(EntityTypeBuilder<Training> builder)
     {
+        builder.ToTable("trainings");
+        
         builder.HasKey(t => t.Id);
         builder.Property(t => t.Id).HasColumnType("uuid");
 
