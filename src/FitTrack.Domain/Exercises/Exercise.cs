@@ -1,7 +1,3 @@
-using FitTrack.Domain.Trainings;
-using FitTrack.Domain.TrainingExercises;
-using FitTrack.Domain.Workouts;
-
 namespace FitTrack.Domain.Exercises;
 
 public class Exercise
@@ -11,10 +7,6 @@ public class Exercise
     public string Sets { get; set; } = string.Empty;
     public string? Rest { get; set; }
     public string? Description { get; set; }
-    public List<Training> Trainings { get; set; } = [];
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-    public ICollection<WorkoutRecord> Records { get; set; } = [];
-    public ICollection<TrainingExercise> TrainingExercise { get; set; } = [];
 }

@@ -1,9 +1,8 @@
 using FitTrack.Domain.Exercises;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FitTrack.Infrastructure.Mapping;
+namespace FitTrack.Infrastructure.Exercises.Mapping;
 
 public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
 {
@@ -27,6 +26,6 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
 
         builder.Property(e => e.UpdatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
-            .ValueGeneratedOnUpdate();
+            .ValueGeneratedOnAddOrUpdate();
     }
 }
