@@ -1,9 +1,8 @@
 using FitTrack.Domain.Trainings;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FitTrack.Infrastructure.Mapping;
+namespace FitTrack.Infrastructure.Trainings.Mapping;
 
 public class TrainingConfiguration : IEntityTypeConfiguration<Training>
 {
@@ -13,9 +12,6 @@ public class TrainingConfiguration : IEntityTypeConfiguration<Training>
         builder.Property(t => t.Id).HasColumnType("uuid");
 
         builder.Property(t => t.Name).IsRequired();
-
-        builder.Property(t => t.Category);
-        builder.HasIndex(t => t.Category).IsUnique();
 
         builder.Property(t => t.Day)
             .HasConversion<string>()
@@ -27,7 +23,7 @@ public class TrainingConfiguration : IEntityTypeConfiguration<Training>
 
         builder.Property(e => e.UpdatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP")
-            .ValueGeneratedOnUpdate();
+            .ValueGeneratedOnAddOrUpdate();
 
     }
 }
