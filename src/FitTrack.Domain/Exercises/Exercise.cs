@@ -1,5 +1,6 @@
 using FitTrack.Domain.Trainings;
 using FitTrack.Domain.TrainingExercises;
+using FitTrack.Domain.Workouts;
 
 namespace FitTrack.Domain.Exercises;
 
@@ -14,5 +15,6 @@ public class Exercise
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
+    public ICollection<WorkoutRecord> Records { get; set; } = [];
     public ICollection<TrainingExercise> TrainingExercise { get; set; } = [];
 }

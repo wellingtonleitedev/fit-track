@@ -15,7 +15,7 @@ public class FitTrackDbContext : DbContext, IUnitOfWork
     public DbSet<Exercise> Exercises { get; set; }
     public DbSet<Training> Trainings { get; set; }
     public DbSet<Workout> Workouts { get; set; }
-    public DbSet<TrainingExercise> TrainingExercises { get; set; }
+    public DbSet<WorkoutRecord> WorkoutRecords { get; set; }
 
     public FitTrackDbContext(DbContextOptions options) : base(options) { }
 
