@@ -13,6 +13,7 @@ public static class DependencyInjection
         services.AddScoped<IWorkoutRepository, WorkoutRepository>();
         services.AddScoped<IExerciseRepository, ExerciseRepository>();
         services.AddScoped<ITrainingRepository, TrainingRepository>();
+        services.AddScoped<IWorkoutRecordRepository, WorkoutRecordRepository>();
         services.AddDbContext<FitTrackDbContext>(options => options.UseSqlite("Data Source = FitTrack.db"));
         services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<FitTrackDbContext>());
 
